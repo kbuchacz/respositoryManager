@@ -2,7 +2,7 @@
 {
     'use strict';
 
-    var configManager = require('./config.manager');
+    var repositoryManager = require('./repository.manager');
 
     function getContext(request)
     {
@@ -19,7 +19,7 @@
 
 
     module.exports = {
-        getConfigManager: getter(configManager)
+        getRepositoryManager: getter(repositoryManager)
 
     };
 })();

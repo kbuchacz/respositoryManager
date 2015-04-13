@@ -27,5 +27,6 @@
     module.exports = function (router)
     {
         router.use(authenticate);
+        require('./repository.endpoint')(router);
     };
 })();
