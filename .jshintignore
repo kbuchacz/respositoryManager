@@ -1,0 +1,5 @@
+app/resources/translations/translations.js
+app/vendor/**/*.js
+app/bower_components/**/*.js
+tests/vendor/**/*.js
+tests/target/**/*.js

@@ -1,0 +1,41 @@
+{
+  "name": "RSGitManager",
+  "version": "0.0.1",
+  "dependencies": {
+    "body-parser": "1.11.0",
+    "cors": "2.5.3",
+    "express": "4.11.2",
+    "gift": "^0.5.0",
+    "github": "^0.2.3",
+    "jasmine-node": "^1.14.5",
+    "jenkins-api": "^0.2.6",
+    "mongoose": "3.8.22",
+    "mongoose-q": "0.0.13",
+    "morgan": "1.5.1",
+    "octonode": "^0.6.16",
+    "path": "^0.11.14",
+    "q": "1.1.2",
+    "request": "^2.53.0",
+    "request-debug": "^0.1.1",
+    "request-promise": "^0.4.0",
+    "sha1": "^1.1.0",
+    "shelljs": "^0.3.0",
+    "simple-git": "^0.14.0",
+    "supertest": "^0.15.0",
+    "underscore": "^1.7.0"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.1",
+    "grunt-contrib-jshint": "^0.10.0",
+    "load-grunt-tasks": "^0.4.0",
+    "time-grunt": "^0.3.1"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "scripts": {
+    "test": "jasmine-node  test/*.js test/spec/*.spec.js app/*.js app/**/*.js --autotest --noStack",
+    "nodemon": "nodemon app/index.js",
+    "start": "node app/index.js"
+  }
+}
