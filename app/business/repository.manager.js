@@ -4,17 +4,30 @@
     var q = require('q');
     var path = require('path');
     var applicationException = require('../service/applicationException');
-    var modes = require('js-git/lib/modes');
     var request = require('request');
-    var sha1 = require('sha1');
-    var saveData = require('js-git/mixins/create-tree');
-    //var saveRepository = require('');
+    var shell = require('shelljs');
+
     function create()
     {
-        function createRepository(filesToRepo)
+        function addUserToRepository(data)
         {
             var defer = q.defer();
-            defer.resolve(filesToRepo);
+            defer.resolve();
+            return defer.promise;
+        }
+
+        function createRepository(data)
+        {
+            var defer = q.defer();
+            if (data.repositoryName) {
+                var path = 'repositories/' + data.repositoryName;
+                if (0 !== shell.exec('mkdir -p ' + path + '; cd ' + path + ' ; git init --bare').code) {
+                    defer.reject(applicationException.FORBIDDEN);
+                }
+                addUserToRepository(data).then(defer.resolve).catch(defer.reject);
+            } else {
+                defer.reject();
+            }
             return defer.promise;
         }
 
