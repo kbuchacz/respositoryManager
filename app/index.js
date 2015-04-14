@@ -33,7 +33,7 @@
     });
 
     require('./REST/routes.js')(app);
-    app.listen(process.env.PORT || 3000);
+    app.listen(process.env.PORT || 4000);
 
     module.exports = app;
 })();
