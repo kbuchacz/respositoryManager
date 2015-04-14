@@ -9,6 +9,7 @@
     var bodyParser = require('body-parser');
     var configDB = require('./config/database.config');
     var app = express();
+
     app.use(express.static(__dirname + '/'));
     app.use(morgan('dev'));
     app.use(bodyParser.urlencoded({extended: false}));
@@ -32,7 +33,7 @@
     });
 
     require('./REST/routes.js')(app);
-    app.listen(process.env.PORT || 3002);
+    app.listen(process.env.PORT || 3000);
 
     module.exports = app;
 })();
