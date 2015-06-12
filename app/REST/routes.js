@@ -10,9 +10,11 @@
             next();
         } else {
             var token = request.headers.authorization.substring(6);
-            token = new Buffer(token, 'base64').toString('ascii');
+            token = new Buffer(token, 'base64').toString('base64');
             if(token != '55191d34e4b01960608d3f3e') {
-                response.sendStatus(applicationException.UNAUTHORIZED);
+                response.status(401).send(applicationException.UNAUTHORIZED);
+            } else {
+                next();
             }
         }
     }

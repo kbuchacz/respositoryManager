@@ -9,6 +9,7 @@
     {
         router.route('/api/repository').post(function (request, response)
         {
+            console.info('Creating new repository...');
             business.getRepositoryManager(request).createRepository(request.body).then(function ()
             {
                 response.sendStatus(201);
