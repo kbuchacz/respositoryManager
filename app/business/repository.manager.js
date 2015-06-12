@@ -19,9 +19,15 @@
         function createRepository(body)
         {
             var defer = q.defer();
-            if (body.repositoryName && body.user) {
-                var path = 'repositories/' + body.user + '/' + body.repositoryName;
-                if (0 !== shell.exec('mkdir -p ' + path + '; cd ' + path + ' ; git init --bare').code) {
+            if (body.repositoryName) {
+                var path = body.repositoryName;
+                if (0 !==
+                        shell.exec('cd /var/git; mkdir ' + path + ';').code &&
+                        0 !==
+                        shell.exec('cd ' +
+                        path +
+                        '; git init –bare –shared=group;' +
+                        'git config –file config http.receivepack true; cd hooks; mv post-update.sample post-update').code) {
                     defer.reject(applicationException.FAIL_CREATE_REPOSITORY);
                 }
                 addUserToRepository(body).then(defer.resolve).catch(defer.reject);
@@ -35,8 +41,7 @@
         {
             var defer = q.defer();
             if (body.user && body.repositoryName) {
-                var path = 'repositories/' + body.user;
-                if (0 !== shell.exec('cd ' + path + '; rm -r ' + body.repositoryName + ';').code) {
+                if (0 !== shell.exec('cd /var/git; rm -Rf ' + body.repositoryName + ';').code) {
                     defer.reject(applicationException.FAIL_REMOVE);
                 }
             }
@@ -45,8 +50,7 @@
         }
 
         return {
-            createRepository: createRepository,
-            removeRepository: removeRepository
+            createRepository: createRepository, removeRepository: removeRepository
         };
     }
 
