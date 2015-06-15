@@ -12,7 +12,7 @@
             console.info('Creating new repository...');
             business.getRepositoryManager(request).createRepository(request.body).then(function ()
             {
-                response.sendStatus(201);
+                response.status(201).json({repositoryUrl: process.argv[0] + request.body.repositoryName});
             }).catch(function (error)
             {
                 if (applicationException.is(error, applicationException.FAIL_CREATE_REPOSITORY)) {
