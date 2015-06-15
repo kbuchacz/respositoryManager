@@ -5,6 +5,7 @@
     var applicationException = require('../service/applicationException');
     var request = require('request');
     var shell = require('shelljs');
+    var basePath = '/var/git/';
 
     function create()
     {
@@ -12,10 +13,10 @@
         {
             var defer = q.defer();
             if (body.repositoryName) {
-                shell.cd('/var/git');
-                shell.mkdir(body.repositoryName);
+                console.log('Creating repository ' + body.repositoryName);
+                shell.mkdir(basePath + body.repositoryName);
                 if (null === shell.error()) {
-                    shell.cd(body.repositoryName);
+                    shell.cd(basePath + body.repositoryName);
                     shell.exec('git init --bare --shared=group');
                     shell.exec('git config --file config http.receivepack true');
                     shell.cd('hooks');
@@ -38,7 +39,7 @@
         {
             var defer = q.defer();
             if (body.repositoryName) {
-                shell.rm('-Rf', '/var/git/' + body.repositoryName + '/');
+                shell.rm('-Rf', basePath + body.repositoryName + '/');
                 if (null != shell.error()) {
                     defer.reject(applicationException.FAIL_REMOVE);
                 }

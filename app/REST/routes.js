@@ -9,9 +9,9 @@
         if (!request.headers.authorization) {
             next();
         } else {
-            var token = request.headers.authorization.substring(6);
-            token = new Buffer(token, 'base64').toString('base64');
-            if(token != '55191d34e4b01960608d3f3e') {
+            var token = request.headers.authorization;
+            var tokenUTC = 'Token ' + new Buffer('55191d34e4b01960608d3f3e').toString('base64');
+            if(token != tokenUTC) {
                 response.status(401).send(applicationException.UNAUTHORIZED);
             } else {
                 next();
